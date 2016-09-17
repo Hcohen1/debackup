@@ -1,5 +1,7 @@
 var https = require('https');
 var fs = require('fs');
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 var httpsOptions = {
     key: fs.readFileSync('\key.pem'),
@@ -12,4 +14,4 @@ var app = function (req, res) {
   res.send();
 }
 
-https.createServer(httpsOptions, app).listen(443,'127.0.0.1');
+https.createServer(httpsOptions, app).listen(server_port,server_ip_address);
